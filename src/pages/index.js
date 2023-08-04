@@ -4,8 +4,12 @@ import { StaticImage } from "gatsby-plugin-image"
 import '../assets/css/custom.min.css'
 import Filters from "../components/Filters"
 import Card from "../components/Card"
+import { Link, graphql } from 'gatsby';
 
-export default function Home() {
+export default function Home({data}) {
+    // console.log(data);
+    const properties = data.site.siteMetadata.properties.map((property) =>property);
+    console.log(properties);
     return (
         <Layout>
             <main className="page">
@@ -39,14 +43,13 @@ export default function Home() {
                             </div>
                         </div>
                         <div class="property-card-list">
-                            <Card />
-                            <Card />
-                            <Card />
-                            <Card />
-                            <Card />
-                            <Card />
-                            <Card />
-                            <Card />
+                            
+                            {properties.map((property, index) => (
+            <Link key={index} to={`/detail/${property.property_alot_number}`}>
+                <Card data={property} />
+            </Link>
+          
+        ))}
                         </div>
                     </div>
                 </section>
@@ -54,3 +57,24 @@ export default function Home() {
         </Layout>
     )
 }
+
+export const query = graphql`
+query MyQuery {
+    site {
+      siteMetadata {
+        properties {
+          property_title
+          property_type
+          property_address
+          property_alot_number
+          price
+          no_of_bathroom
+          location
+          images
+          furnished
+          floor_area
+        }
+      }
+    }
+  }
+`;

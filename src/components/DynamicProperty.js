@@ -32,7 +32,7 @@ import WhatsAppIcon from '../assets/svg/whatsapp.svg'
 import PayIcon from '../assets/svg/pay.svg'
 import BackArrow from '../assets/svg/back-arrow.svg'
 
-const Detail = () => {
+const DynamicProperty = () => {
     return (
         <Layout>
             <main className="property_details">
@@ -353,4 +353,4 @@ const Detail = () => {
     )
 }
 
-export default Detail
+export default DynamicProperty

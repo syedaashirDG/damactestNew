@@ -1,10 +1,10 @@
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
+const dummyData = require('./src/sample_data/dummyData.json'); 
 module.exports = {
   siteMetadata: {
-    title: `damac`,
-    siteUrl: `https://www.yourdomain.tld`
+   properties:dummyData.properties
   },
   plugins: [
     "gatsby-plugin-postcss",

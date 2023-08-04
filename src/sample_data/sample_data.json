@@ -1,0 +1,64 @@
+{
+    "filters": [
+        {
+            "id": 1,
+            "title": "Property Type",
+            "options": [
+                "All",
+                "Studio",
+                "1BR",
+                "2BR",
+                "3BR",
+                "4BR",
+                "5BR",
+                "6BR",
+                "7BR"
+            ]
+        },
+        {
+            "id": 2,
+            "title": "Bedroom",
+            "options": [
+                "All",
+                "Studio",
+                "1BR",
+                "2BR",
+                "3BR",
+                "4BR",
+                "5BR",
+                "6BR",
+                "7BR"
+            ]
+        },
+        {
+            "id": 3,
+            "title": "Floor Area",
+            "options": [
+                "All",
+                "Studio",
+                "1BR",
+                "2BR",
+                "3BR",
+                "4BR",
+                "5BR",
+                "6BR",
+                "7BR"
+            ]
+        },
+        {
+            "id": 4,
+            "title": "Price",
+            "options": [
+                "All",
+                "Studio",
+                "1BR",
+                "2BR",
+                "3BR",
+                "4BR",
+                "5BR",
+                "6BR",
+                "7BR"
+            ]
+        }
+    ]
+}

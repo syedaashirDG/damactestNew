@@ -2,39 +2,44 @@ import React from 'react'
 import img1 from '../assets/images/card/card-img-1.webp'
 import Bedroom from '../assets/svg/bedroom.svg'
 import Area from '../assets/svg/area.svg'
-import Unfurnished from '../assets/svg/unfurnished.svg'
+import FurnishedIcon from '../assets/svg/Unfurnished.svg'
 import Handover from '../assets/svg/handover.svg'
 import CallIcon from '../assets/svg/call-icon.svg'
 import MailIcon from '../assets/svg/mail.svg'
 import WhatsAppIcon from '../assets/svg/whatsapp.svg'
+import HeartIcon from '../assets/svg/white-heart.svg'
 import PayIcon from '../assets/svg/pay.svg'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
-const Card = () => {
+import { Pagination } from 'swiper/modules';
+
+const Card = ({ data }) => {
+    console.log(data, "data")
     return (
         <div class="property-card">
 
             <div class="card-tags">
                 <span class="card-heart">
-                    <img src="/assets/svg/white-heart.svg" alt="" class="svg-convert" />
+                    <HeartIcon />
                 </span>
-                <span class="tag">GOLDEN VISA</span>
+                {data.goldenVisa && <span class="tag">GOLDEN VISA</span>}
             </div>
             <div class="card-img">
-                <div class="card-img-slider swiper">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <img src={img1} width="477" height="333" alt="property" />
-                        </div>
-                        <div class="swiper-slide">
-                            <img src={img1} width="477" height="333" alt="property" />
-                        </div>
-                        <div class="swiper-slide">
-                            <img src={img1} width="477" height="333" alt="property" />
-                        </div>
-                    </div>
-                    <div class="swiper-pagination"></div>
-                </div>
+                <Swiper pagination={true} modules={[Pagination]} className="card-img-slider">
+                    <SwiperSlide>
+                        <img src={img1} width="477" height="333" alt="property" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <img src={img1} width="477" height="333" alt="property" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <img src={img1} width="477" height="333" alt="property" />
+                    </SwiperSlide>
 
+                    <div class="swiper-pagination"></div>
+                </Swiper>
             </div>
 
 
@@ -42,27 +47,27 @@ const Card = () => {
 
                 <div class="card-title">
                     <p class="para-small">OFFPLAN - APARTMENT</p>
-                    <h3 class="card-price">AED 1,320,000</h3>
-                    <p>Canal Crown, Business Bay, Dubai</p>
+                    <h3 class="card-price">AED {data.price}</h3>
+                    <p>{data.location}</p>
                 </div>
 
                 <div class="card-details">
                     <ul class="card-facilities">
                         <li>
                             <span class="ficon"><Bedroom /></span>
-                            <p>1</p>
+                            <p>{data.no_of_bedroom}</p>
                         </li>
                         <li>
                             <span class="ficon"><Area /></span>
-                            <p>10,000 sq. ft.</p>
+                            <p>{data.floor_area} sq. ft.</p>
                         </li>
                         <li>
-                            <span class="ficon"><Unfurnished /></span>
-                            <p>Unfurnished</p>
+                            <span class="ficon"><FurnishedIcon /></span>
+                            <p>{`${data.furnished ? 'Furnished' : 'Unfurnished'}`}</p>
                         </li>
                         <li>
                             <span class="ficon"><Handover /></span>
-                            <p>12/31/2024</p>
+                            <p>{data.completion_date}</p>
                         </li>
                     </ul>
                     <div class="card-anchors">

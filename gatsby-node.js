@@ -25,6 +25,9 @@ exports.createPages = async ({ graphql, actions }) => {
           description
           completion_date
           car_parking
+          balcony
+          launched_date
+          modalType
         }
       }
     }
@@ -32,12 +35,12 @@ exports.createPages = async ({ graphql, actions }) => {
   `)
 
   result.data.site.siteMetadata.properties.forEach(property => {
-      createPage({
-        path: `/detail/${property.property_alot_number}`,
-        component: path.resolve(`src/templates/detail.js`),
-        context: {
-          property
-        },
-      })
+    createPage({
+      path: `/detail/${property.property_alot_number}`,
+      component: path.resolve(`src/templates/detail.js`),
+      context: {
+        property
+      },
     })
+  })
 }

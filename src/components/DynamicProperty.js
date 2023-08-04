@@ -31,8 +31,10 @@ import MailIcon from '../assets/svg/mail.svg'
 import WhatsAppIcon from '../assets/svg/whatsapp.svg'
 import PayIcon from '../assets/svg/pay.svg'
 import BackArrow from '../assets/svg/back-arrow.svg'
+import Fancybox from './FancyBox'
 
-const DynamicProperty = () => {
+const DynamicProperty = ({ pageContext }) => {
+    console.log(pageContext, "pageContext")
     return (
         <Layout>
             <main className="property_details">
@@ -70,26 +72,40 @@ const DynamicProperty = () => {
 
                 <section className="image_gallery">
                     <div className="container">
-                        <div className="images_grid">
-                            <div className="gallery_img img_1">
-                                <div className="h-100 w-100">
-                                    <img className="img-hack" src={galleryImg1} alt="Gallery image" />
-                                </div>
+                        <Fancybox
+                            options={{
+                                Carousel: {
+                                    infinite: false,
+                                },
+                            }}
+                        >
+                            <div className="images_grid">
+
+                                <a data-fancybox="gallery" href={pageContext.property.images[0]} className="gallery_img img_1">
+                                    <div className="h-100 w-100">
+                                        <img className="img-hack" src={pageContext.property.images[0]} alt="Gallery image" />
+                                    </div>
+                                </a>
+                                <a data-fancybox="gallery" href={pageContext.property.images[1]} className="gallery_img img_2">
+                                    <div className="h-100 w-100">
+                                        <img className="img-hack" src={pageContext.property.images[1]} alt="Gallery image" />
+                                    </div>
+                                </a>
+                                <a data-fancybox="gallery" href={pageContext.property.images[2]} className="gallery_img img_3 img__withOverlay">
+                                    <div className="h-100 w-100">
+                                        <img className="img-hack" src={pageContext.property.images[2]} alt="Gallery image" />
+                                    </div>
+                                    <div className="content">
+                                        <span>{pageContext.property.images.length - 3}+ Images</span>
+                                    </div>
+                                </a>
+                                {pageContext.property.images.slice(3, pageContext.property.images.length).map((img) => {
+                                    return (
+                                        <a data-fancybox="gallery" href={img}></a>
+                                    )
+                                })}
                             </div>
-                            <div className="gallery_img img_2">
-                                <div className="h-100 w-100">
-                                    <img className="img-hack" src={galleryImg2} alt="Gallery image" />
-                                </div>
-                            </div>
-                            <div className="gallery_img img_3 img__withOverlay">
-                                <div className="h-100 w-100">
-                                    <img className="img-hack" src={galleryImg3} alt="Gallery image" />
-                                </div>
-                                <div className="content">
-                                    <span>8+ Images</span>
-                                </div>
-                            </div>
-                        </div>
+                        </Fancybox>
                     </div>
                 </section>
 
@@ -98,30 +114,30 @@ const DynamicProperty = () => {
                         <div className="custom-row">
                             <div className="col_lg_9 col_12">
                                 <p className="property_sub_title">RESIDENTIAL - VILLA FOR SALE IN DAMAC LAGOONS, DUBAI LAND, UAE</p>
-                                <h3 className="property_title">DAMAC LAGOONS VENICE <span>AYKC3D/79/7906</span></h3>
+                                <h3 className="property_title">{pageContext.property.property_title} <span>{pageContext.property.property_alot_number}</span></h3>
                                 <ul className="card-facilities nocard--facilities">
                                     <li>
                                         <span className="ficon">
                                             {/* <img data-src="/assets/svg/bedroom.svg" width="15" height="15" alt="icon" /> */}
                                             <Bedroom />
                                         </span>
-                                        <p>1</p>
+                                        <p>{pageContext.property.no_of_bedroom}</p>
                                     </li>
                                     <li>
                                         <span className="ficon"><Area /></span>
-                                        <p>10,000 sq. ft.</p>
+                                        <p>{pageContext.property.floor_area} sq. ft.</p>
                                     </li>
                                     <li>
                                         <span className="ficon"><Bathroom /></span>
-                                        <p>6 Bathrooms</p>
+                                        <p>{pageContext.property.no_of_bathroom} Bathrooms</p>
                                     </li>
                                     <li>
                                         <span className="ficon"><Unfurnished /></span>
-                                        <p>Unfurnished</p>
+                                        <p>{`${pageContext.property.furnished ? 'Furnished' : 'Unfurnished'}`}</p>
                                     </li>
                                     <li>
                                         <span className="ficon"><Building /></span>
-                                        <p>Villa</p>
+                                        <p>{pageContext.property.property_type}</p>
                                     </li>
                                 </ul>
                                 <div className="property_info_badges_wrapper">
@@ -155,20 +171,20 @@ const DynamicProperty = () => {
                                     <h4>UNIT DETAILS</h4>
                                     <div className="unit_list_wrapper">
                                         <ul className="unit_list">
-                                            <li><span>Status</span> <span>Off-Plan</span></li>
-                                            <li><span>Unit Type</span> <span>Apartment</span></li>
-                                            <li><span>Bathroom</span> <span>1</span></li>
-                                            <li><span>Unit Size</span> <span>908 sq.ft.</span></li>
-                                            <li><span>Car Parking</span> <span>1</span></li>
+                                            <li><span>Status</span> <span>{pageContext.property.status}</span></li>
+                                            <li><span>Unit Type</span> <span>{pageContext.property.property_type}</span></li>
+                                            <li><span>Bathroom</span> <span>{pageContext.property.no_of_bathroom}</span></li>
+                                            <li><span>Unit Size</span> <span>{pageContext.property.floor_area} sq.ft.</span></li>
+                                            <li><span>Car Parking</span> <span>{pageContext.property.car_parking}</span></li>
                                             <li><span>Bedroom</span> <span>1 BHK</span></li>
                                         </ul>
                                         <ul className="unit_list">
-                                            <li><span>Furnishing</span> <span>Off-Plan</span></li>
-                                            <li><span>Terrace Area/ Balcony</span> <span>Apartment</span></li>
-                                            <li><span>Launch Date:</span> <span>1</span></li>
-                                            <li><span>Completion/ Handover Date </span> <span>908 sq.ft.</span></li>
-                                            <li><span>Floor</span> <span>1</span></li>
-                                            <li><span>Model/Prototype</span> <span>1 BHK</span></li>
+                                            <li><span>Furnishing</span> <span>{`${pageContext.property.furnished ? 'Furnished' : 'Unfurnished'}`}</span></li>
+                                            <li><span>Terrace Area/ Balcony</span> <span>{`${pageContext.property.balcony ? 'Yes' : 'No'}`}</span></li>
+                                            <li><span>Launch Date:</span> <span>{pageContext.property.launched_date}</span></li>
+                                            <li><span>Completion/ Handover Date </span> <span>{pageContext.property.completion_date}</span></li>
+                                            <li><span>Floor</span> <span>{pageContext.property.floor}</span></li>
+                                            <li><span>Model/Prototype</span> <span>{pageContext.property.modalType}</span></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -180,8 +196,8 @@ const DynamicProperty = () => {
                                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3613.9418718222387!2d55.13450567600137!3d25.069959236841555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f13435f3abe57%3A0xb4c00b9d46311cd0!2sSheikh%20Zayed%20Rd%20-%20Dubai%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2s!4v1691048888676!5m2!1sen!2s" width="100%" height="100%" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                         </div>
                                         <div className="location_details">
-                                            <h6 className="location_title">Sheik Zayed Road</h6>
-                                            <h6 className="location_subTitle">Sheik Zayed Road, Business Bay, Dubai</h6>
+                                            <h6 className="location_title">{pageContext.property.location}</h6>
+                                            <h6 className="location_subTitle">{pageContext.property.property_address}</h6>
                                             <div className="primary-anchor other--anchor w-100 mb-0">
                                                 <a href="javascrpit:" className="w-100">
                                                     <Location />
@@ -194,11 +210,7 @@ const DynamicProperty = () => {
                                 <hr className="hr" />
                                 <div className="description">
                                     <h4>Description</h4>
-                                    <p className="content">The Mediterranean journey at <a href="https://www.damacproperties.com/en/communities/damac-lagoons/" _target="blank">DAMAC Lagoons</a> continues with La Serenissima. Venice is a
-                                        collection of spacious villas with sweeping views of the lagoons and stunning
-                                        monochromatic architecture, inspired by the quintessential Italian city. <br /><br /> Make
-                                        way for wonder with cosy waterside cafés, gondola rides, high-end retail, carnival vibes
-                                        and among a lot more, the jewel in the crown – a magnificent clubhouse. </p>
+                                    <p className="content">{pageContext.property.description} </p>
                                     <a href="javascript:">Read more</a>
                                     <div className="primary-anchor other--anchor mb-0 mt-3">
                                         <a href="javascrpit:">
@@ -315,7 +327,7 @@ const DynamicProperty = () => {
                             </div>
                             <div className="col_lg_3 col_12">
                                 <div className="pricing">
-                                    <h3>AED 1,512,221</h3>
+                                    <h3>AED {pageContext.property.price}</h3>
                                     <p className="black-col">Starting price</p>
                                     <div className="card-anchors">
                                         <div className="primary-anchor other--anchor">

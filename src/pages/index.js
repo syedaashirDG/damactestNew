@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import Layout from "../components/Layout"
 import { StaticImage } from "gatsby-plugin-image"
 import '../assets/css/custom.min.css'
@@ -6,10 +6,10 @@ import Filters from "../components/Filters"
 import Card from "../components/Card"
 import { Link, graphql } from 'gatsby';
 
-export default function Home({data}) {
+export default function Home({ data }) {
     // console.log(data);
-    const properties = data.site.siteMetadata.properties.map((property) =>property);
-    console.log(properties);
+    const properties = data.site.siteMetadata.properties.map((property) => property);
+    const [showSorting, setshowSorting] = useState(false)
     return (
         <Layout>
             <main className="page">
@@ -17,10 +17,10 @@ export default function Home({data}) {
                 <section class="section property">
                     <div class="container">
                         <div class="sort-wrapper">
-                            <div class="selection-input ">
+                            <div class="selection-input " onClick={() => { setshowSorting(!showSorting) }}>
                                 <h6 class="h6 m-0"> Sort by: <span>Recent</span>
                                 </h6>
-                                <div class="sort-popup">
+                                {showSorting && <div class="sort-popup">
                                     <p>Sort by</p>
                                     <ul class="filters-options">
                                         <li>
@@ -39,17 +39,17 @@ export default function Home({data}) {
                                             </label>
                                         </li>
                                     </ul>
-                                </div>
+                                </div>}
                             </div>
                         </div>
                         <div class="property-card-list">
-                            
+
                             {properties.map((property, index) => (
-            <Link key={index} to={`/detail/${property.property_alot_number}`}>
-                <Card data={property} />
-            </Link>
-          
-        ))}
+                                <Link key={index} to={`/detail/${property.property_alot_number}`}>
+                                    <Card data={property} />
+                                </Link>
+
+                            ))}
                         </div>
                     </div>
                 </section>
@@ -73,6 +73,8 @@ query MyQuery {
           images
           furnished
           floor_area
+          no_of_bedroom
+          goldenVisa
         }
       }
     }

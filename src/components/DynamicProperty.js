@@ -34,7 +34,10 @@ import BackArrow from '../assets/svg/back-arrow.svg'
 import Fancybox from './FancyBox'
 
 const DynamicProperty = ({ pageContext }) => {
-    console.log(pageContext, "pageContext")
+    console.log(pageContext.propertyData, "propertyData")
+    const propertyData = pageContext.propertyData;
+
+
     return (
         <Layout>
             <main className="property_details">
@@ -81,25 +84,25 @@ const DynamicProperty = ({ pageContext }) => {
                         >
                             <div className="images_grid">
 
-                                <a data-fancybox="gallery" href={pageContext.property.images[0]} className="gallery_img img_1">
+                                <a data-fancybox="gallery" href={propertyData.images[0]} className="gallery_img img_1">
                                     <div className="h-100 w-100">
-                                        <img className="img-hack" src={pageContext.property.images[0]} alt="Gallery image" />
+                                        <img className="img-hack" src={propertyData.images[0]} alt="Gallery image" />
                                     </div>
                                 </a>
-                                <a data-fancybox="gallery" href={pageContext.property.images[1]} className="gallery_img img_2">
+                                <a data-fancybox="gallery" href={propertyData.images[1]} className="gallery_img img_2">
                                     <div className="h-100 w-100">
-                                        <img className="img-hack" src={pageContext.property.images[1]} alt="Gallery image" />
+                                        <img className="img-hack" src={propertyData.images[1]} alt="Gallery image" />
                                     </div>
                                 </a>
-                                <a data-fancybox="gallery" href={pageContext.property.images[2]} className="gallery_img img_3 img__withOverlay">
+                                <a data-fancybox="gallery" href={propertyData.images[2]} className="gallery_img img_3 img__withOverlay">
                                     <div className="h-100 w-100">
-                                        <img className="img-hack" src={pageContext.property.images[2]} alt="Gallery image" />
+                                        <img className="img-hack" src={propertyData.images[2]} alt="Gallery image" />
                                     </div>
                                     <div className="content">
-                                        <span>{pageContext.property.images.length - 3}+ Images</span>
+                                        <span>{propertyData.images.length - 3}+ Images</span>
                                     </div>
                                 </a>
-                                {pageContext.property.images.slice(3, pageContext.property.images.length).map((img) => {
+                                {propertyData.images.slice(3, propertyData.images.length).map((img) => {
                                     return (
                                         <a data-fancybox="gallery" href={img}></a>
                                     )
@@ -114,30 +117,30 @@ const DynamicProperty = ({ pageContext }) => {
                         <div className="custom-row">
                             <div className="col_lg_9 col_12">
                                 <p className="property_sub_title">RESIDENTIAL - VILLA FOR SALE IN DAMAC LAGOONS, DUBAI LAND, UAE</p>
-                                <h3 className="property_title">{pageContext.property.property_title} <span>{pageContext.property.property_alot_number}</span></h3>
+                                <h3 className="property_title">{propertyData.property_title} <span>{propertyData.property_alot_number}</span></h3>
                                 <ul className="card-facilities nocard--facilities">
                                     <li>
                                         <span className="ficon">
                                             {/* <img data-src="/assets/svg/bedroom.svg" width="15" height="15" alt="icon" /> */}
                                             <Bedroom />
                                         </span>
-                                        <p>{pageContext.property.no_of_bedroom}</p>
+                                        <p>{propertyData.no_of_bedroom}</p>
                                     </li>
                                     <li>
                                         <span className="ficon"><Area /></span>
-                                        <p>{pageContext.property.floor_area} sq. ft.</p>
+                                        <p>{propertyData.floor_area} sq. ft.</p>
                                     </li>
                                     <li>
                                         <span className="ficon"><Bathroom /></span>
-                                        <p>{pageContext.property.no_of_bathroom} Bathrooms</p>
+                                        <p>{propertyData.no_of_bathroom} Bathrooms</p>
                                     </li>
                                     <li>
                                         <span className="ficon"><Unfurnished /></span>
-                                        <p>{`${pageContext.property.furnished ? 'Furnished' : 'Unfurnished'}`}</p>
+                                        <p>{`${propertyData.furnished ? 'Furnished' : 'Unfurnished'}`}</p>
                                     </li>
                                     <li>
                                         <span className="ficon"><Building /></span>
-                                        <p>{pageContext.property.property_type}</p>
+                                        <p>{propertyData.property_type}</p>
                                     </li>
                                 </ul>
                                 <div className="property_info_badges_wrapper">
@@ -171,20 +174,20 @@ const DynamicProperty = ({ pageContext }) => {
                                     <h4>UNIT DETAILS</h4>
                                     <div className="unit_list_wrapper">
                                         <ul className="unit_list">
-                                            <li><span>Status</span> <span>{pageContext.property.status}</span></li>
-                                            <li><span>Unit Type</span> <span>{pageContext.property.property_type}</span></li>
-                                            <li><span>Bathroom</span> <span>{pageContext.property.no_of_bathroom}</span></li>
-                                            <li><span>Unit Size</span> <span>{pageContext.property.floor_area} sq.ft.</span></li>
-                                            <li><span>Car Parking</span> <span>{pageContext.property.car_parking}</span></li>
+                                            <li><span>Status</span> <span>{propertyData.status}</span></li>
+                                            <li><span>Unit Type</span> <span>{propertyData.property_type}</span></li>
+                                            <li><span>Bathroom</span> <span>{propertyData.no_of_bathroom}</span></li>
+                                            <li><span>Unit Size</span> <span>{propertyData.floor_area} sq.ft.</span></li>
+                                            <li><span>Car Parking</span> <span>{propertyData.car_parking}</span></li>
                                             <li><span>Bedroom</span> <span>1 BHK</span></li>
                                         </ul>
                                         <ul className="unit_list">
-                                            <li><span>Furnishing</span> <span>{`${pageContext.property.furnished ? 'Furnished' : 'Unfurnished'}`}</span></li>
-                                            <li><span>Terrace Area/ Balcony</span> <span>{`${pageContext.property.balcony ? 'Yes' : 'No'}`}</span></li>
-                                            <li><span>Launch Date:</span> <span>{pageContext.property.launched_date}</span></li>
-                                            <li><span>Completion/ Handover Date </span> <span>{pageContext.property.completion_date}</span></li>
-                                            <li><span>Floor</span> <span>{pageContext.property.floor}</span></li>
-                                            <li><span>Model/Prototype</span> <span>{pageContext.property.modalType}</span></li>
+                                            <li><span>Furnishing</span> <span>{`${propertyData.furnished ? 'Furnished' : 'Unfurnished'}`}</span></li>
+                                            <li><span>Terrace Area/ Balcony</span> <span>{`${propertyData.balcony ? 'Yes' : 'No'}`}</span></li>
+                                            <li><span>Launch Date:</span> <span>{propertyData.launched_date}</span></li>
+                                            <li><span>Completion/ Handover Date </span> <span>{propertyData.completion_date}</span></li>
+                                            <li><span>Floor</span> <span>{propertyData.floor}</span></li>
+                                            <li><span>Model/Prototype</span> <span>{propertyData.modalType}</span></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -196,8 +199,8 @@ const DynamicProperty = ({ pageContext }) => {
                                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3613.9418718222387!2d55.13450567600137!3d25.069959236841555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f13435f3abe57%3A0xb4c00b9d46311cd0!2sSheikh%20Zayed%20Rd%20-%20Dubai%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2s!4v1691048888676!5m2!1sen!2s" width="100%" height="100%" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                         </div>
                                         <div className="location_details">
-                                            <h6 className="location_title">{pageContext.property.location}</h6>
-                                            <h6 className="location_subTitle">{pageContext.property.property_address}</h6>
+                                            <h6 className="location_title">{propertyData.location}</h6>
+                                            <h6 className="location_subTitle">{propertyData.property_address}</h6>
                                             <div className="primary-anchor other--anchor w-100 mb-0">
                                                 <a href="javascrpit:" className="w-100">
                                                     <Location />
@@ -210,7 +213,7 @@ const DynamicProperty = ({ pageContext }) => {
                                 <hr className="hr" />
                                 <div className="description">
                                     <h4>Description</h4>
-                                    <p className="content">{pageContext.property.description} </p>
+                                    <p className="content">{propertyData.description} </p>
                                     <a href="javascript:">Read more</a>
                                     <div className="primary-anchor other--anchor mb-0 mt-3">
                                         <a href="javascrpit:">
@@ -327,7 +330,7 @@ const DynamicProperty = ({ pageContext }) => {
                             </div>
                             <div className="col_lg_3 col_12">
                                 <div className="pricing">
-                                    <h3>AED {pageContext.property.price}</h3>
+                                    <h3>AED {propertyData.price}</h3>
                                     <p className="black-col">Starting price</p>
                                     <div className="card-anchors">
                                         <div className="primary-anchor other--anchor">

@@ -4,12 +4,12 @@ import SelectFilter from './SelectFilter';
 import SubmitButton from './SubmitButton';
 import Data from '../sample_data/sample_data.json'
 
-const Filters = () => {
+const Filters = ({onStateChange}) => {
   const [activeField, setActiveField] = useState(null);
-  const [showFilter, setShowFilter] = useState(false);
+  const [checkedValues, setCheckedValues] = useState([]);
 
   const handleShowFilter = (index) => {
-    setActiveField((prevActiveField) => (prevActiveField === index+1 ? null : index+1));
+    setActiveField((prevActiveField) => (prevActiveField === index ? null : index));
   };
 
 console.log(activeField);
@@ -17,19 +17,35 @@ console.log(activeField);
 
   const filters = Data.filters
 
+  const handleChildStateChange = (newState) => {
+    setCheckedValues(newState);
+  };
+
+  // console.log('checked======',checkedValues);
+
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    onStateChange(checkedValues);
+
+  }
+
   return (
     <section className="section filters">
       <div className="container">
         <div className="filter-wrap">
           {filters.map((filter, index) => {
             return (
-              <div key={index} onClick={(()=>handleShowFilter(index))} >
-                <SelectFilter index={filter.id} title={filter.title} activeField={activeField} showFilter={showFilter} options={filter.options} />
+              <div key={index}  >
+                <SelectFilter onStateChange={handleChildStateChange} index={filter.id} handleShowFilter={handleShowFilter} title={filter.title} activeField={activeField} options={filter.options} />
               </div>
             )
           })}
 
-          <SubmitButton />
+<div className="primary-anchor">
+      <button type='submit' onClick={(e)=>handleSubmit(e)} className="w-100">
+        <span>SUBMIT</span>
+      </button>
+    </div>
         </div>
       </div>
     </section>

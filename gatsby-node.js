@@ -1,46 +1,54 @@
 const path = require("path")
 const slugify = require("slugify")
-exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions
+const dummyData = require('./src/sample_data/dummyData.json');
+exports.createPages = async ({ actions }) => {
+  const { createPage } = actions;
 
-  const result = await graphql(`
-  query MyQuery {
-    site {
-      siteMetadata {
-        properties {
-          property_title
-          status
-          unit_size
-          property_type
-          property_alot_number
-          property_address
-          price
-          no_of_bedroom
-          no_of_bathroom
-          location
-          images
-          furnished
-          floor_area
-          floor
-          description
-          completion_date
-          car_parking
-          balcony
-          launched_date
-          modalType
-        }
-      }
-    }
-  }
-  `)
+  // Assuming 'properties' is an array in dummyData
+  const properties = dummyData;
 
-  result.data.site.siteMetadata.properties.forEach(property => {
+  // Create individual pages for each property
+  properties.forEach((property) => {
+    const path = `/detail/${property.property_alot_number}`;
+
     createPage({
-      path: `/detail/${property.property_alot_number}`,
-      component: path.resolve(`src/templates/detail.js`),
+      path,
+      component: require.resolve('./src/templates/detail.js'), // Replace with your template component
       context: {
-        property
+        propertyData: property, // Pass the individual property data to the template component
       },
-    })
-  })
-}
+    });
+  });
+};
+
+
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions;
+  const typeDefs = `
+    type Property implements Node {
+      property_title: String
+      property_alot_number: String
+      property_address: String
+      property_type: String
+      price: String
+      floor_area: String
+      no_of_bedroom: String
+      no_of_bathroom: Int
+      status: String
+      furnished: Boolean
+      unit_size: String
+      car_parking: Int
+      completion_date: String
+      launched_date: String
+      floor: Int
+      location: String
+      goldenVisa: Boolean
+      balcony: Boolean
+      modalType: String
+      description: String
+      images: [String]
+    }
+  `;
+  createTypes(typeDefs);
+};
+

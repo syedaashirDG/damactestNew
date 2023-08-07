@@ -2,7 +2,7 @@ import React from 'react'
 import img1 from '../assets/images/card/card-img-1.webp'
 import Bedroom from '../assets/svg/bedroom.svg'
 import Area from '../assets/svg/area.svg'
-import FurnishedIcon from '../assets/svg/Unfurnished.svg'
+import FurnishedIcon from '../assets/images/unfurnished.png'
 import Handover from '../assets/svg/handover.svg'
 import CallIcon from '../assets/svg/call-icon.svg'
 import MailIcon from '../assets/svg/mail.svg'
@@ -62,7 +62,7 @@ const Card = ({ data }) => {
                             <p>{data.floor_area} sq. ft.</p>
                         </li>
                         <li>
-                            <span class="ficon"><FurnishedIcon /></span>
+                            <span class="ficon"><img src={FurnishedIcon} /></span>
                             <p>{`${data.furnished ? 'Furnished' : 'Unfurnished'}`}</p>
                         </li>
                         <li>

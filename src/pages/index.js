@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import Layout from "../components/Layout"
 import { StaticImage } from "gatsby-plugin-image"
-import '../assets/css/custom.min.css'
+// import '../assets/css/custom.min.css'
 import Filters from "../components/Filters"
 import Card from "../components/Card"
 import { Link, graphql } from 'gatsby';
@@ -11,7 +11,7 @@ export default function Home({ data }) {
     const properties = data.allDummyDataJson.nodes.map((property) => property);
     const [showSorting, setshowSorting] = useState(false)
     const [checkedValues, setCheckedValues] = useState([]);
-    const [sort, setSort] = useState(['All', 'Studio', '1BR'])
+    const [sort, setSort] = useState(['All', 'studio', '1BR'])
     const [selectedOption, setSelectedOption] = useState('All');
 
     const handleCheckboxChange = (event, option) => {
@@ -35,12 +35,30 @@ export default function Home({ data }) {
         }
     });
 
-    const sortProperties = (properties, option) => {
+     const sortProperties = (properties, option) => {
         switch (option) {
             case 'All':
                 return properties; // No sorting needed
-            case 'Studio':
-                return properties.slice().sort((a, b) => a.no_of_bedroom.localeCompare(b.no_of_bedroom));
+            case 'studio':
+                return properties
+                    .slice()
+                    .sort((a, b) => {
+                        // Custom sorting logic:
+                        // If both a and b have 'studio' in no_of_bedroom, keep their original order
+                        if (a.no_of_bedroom === 'studio' && b.no_of_bedroom === 'studio') {
+                            return 0;
+                        }
+                        // If a has 'studio' in no_of_bedroom but b does not, prioritize a (a comes first)
+                        if (a.no_of_bedroom === 'studio') {
+                            return -1;
+                        }
+                        // If b has 'studio' in no_of_bedroom but a does not, prioritize b (b comes first)
+                        if (b.no_of_bedroom === 'studio') {
+                            return 1;
+                        }
+                        // For all other cases, use default locale-based string comparison
+                        return a.no_of_bedroom.localeCompare(b.no_of_bedroom);
+                    });
             case '1BR':
                 return properties.slice().sort((a, b) => a.no_of_bedroom.localeCompare(b.no_of_bedroom));
             // Add more cases for other sorting options if needed

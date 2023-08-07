@@ -40,7 +40,7 @@ const SelectFilter = ({ title, options, activeField, index,handleShowFilter,onSt
         </div>
         }
         <ul className="selected-options d-none">
-          <li>Studio</li>
+          <li>studio</li>
           <li>1BR</li>
           <li>2BR</li>
         </ul>

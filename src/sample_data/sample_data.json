@@ -5,7 +5,7 @@
             "title": "Property Type",
             "options": [
                 "All",
-                "Studio",
+                "studio",
                 "1BR",
                 "2BR",
                 "3BR",
@@ -20,7 +20,7 @@
             "title": "Bedroom",
             "options": [
                 "All",
-                "Studio",
+                "studio",
                 "1BR",
                 "2BR",
                 "3BR",
@@ -35,7 +35,7 @@
             "title": "Floor Area",
             "options": [
                 "All",
-                "Studio",
+                "studio",
                 "1BR",
                 "2BR",
                 "3BR",
@@ -50,7 +50,7 @@
             "title": "Price",
             "options": [
                 "All",
-                "Studio",
+                "studio",
                 "1BR",
                 "2BR",
                 "3BR",
@@ -197,7 +197,7 @@
             "property_type": "Villa",
             "price": "1,000,000",
             "floor_area": "3000",
-            "no_of_bedroom": "Studio",
+            "no_of_bedroom": "studio",
             "no_of_bathroom": 3,
             "status": "Off-plan",
             "furnished": true,
@@ -293,7 +293,7 @@
             "property_type": "Villa",
             "price": "1,000,000",
             "floor_area": "3000",
-            "no_of_bedroom": "Studio",
+            "no_of_bedroom": "studio",
             "no_of_bathroom": 3,
             "status": "Off-plan",
             "furnished": true,

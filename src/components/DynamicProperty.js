@@ -53,7 +53,9 @@ const DynamicProperty = ({ pageContext }) => {
                             <div className="col_md_6 col_12">
                                 <a href="javascript:" className="back_icon">
                                     <BackArrow />
+                                    <Link to='/' >
                                     <p className="m-0 fw-700">Back to property listing</p>
+                                    </Link>
                                 </a>
                             </div>
                             <div className="col_md_6 col_12">

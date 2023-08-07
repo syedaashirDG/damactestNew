@@ -2158,7 +2158,7 @@ p.s-font {
 }
 
 .sort-wrapper .selection-input {
-    padding: 14px 55px 14px 20px;
+    padding: 14px 7px 14px 14px;
     height: auto;
     margin-bottom: 20px;
     position: relative;
@@ -2166,7 +2166,8 @@ p.s-font {
 }
 
 .sort-wrapper .selection-input::after {
-    background: url('../assets/images//black-arrow.png');
+    display: none;
+    // background: url('../assets/images/black-arrow.png');
     height: 16px
 }
 

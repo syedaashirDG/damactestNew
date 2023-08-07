@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    namespace: damactestapp
+    name: damactestapp-service
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: damactestapp-service
+    template:
+        metadata:
+            labels:
+                app: damactestapp-service
+        spec:
+            containers:
+                - name: damactestapp-service
+                  image:
+                      registry.digitalocean.com/dgkubecontainer/damactestapp-service:1.2
+                      # 192.168.20.219:32000 use this to push docker
+                  ports:
+                      - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: damactestapp-service
+    namespace: damactestapp
+    labels:
+        app: damactestapp-service
+spec:
+    type: ClusterIP
+    ports:
+        - port: 8000
+    selector:
+        app: damactestapp-service

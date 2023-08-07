@@ -4,6 +4,7 @@ import { StaticImage } from "gatsby-plugin-image"
 // import '../assets/css/custom.min.css'
 import Filters from "../components/Filters"
 import Card from "../components/Card"
+import BlackArrow from '../assets/images/black-arrow.png'
 import { Link, graphql } from 'gatsby';
 
 export default function Home({ data }) {
@@ -78,8 +79,10 @@ export default function Home({ data }) {
                     <div class="container">
                         <div class="sort-wrapper">
                             <div class="selection-input ">
-                                <h6 class="h6 m-0 w-[130px]" onClick={() => { setshowSorting(!showSorting) }} > Sort by: <span>{selectedOption ? selectedOption : 'All'}</span>
+                                <div onClick={() => { setshowSorting(!showSorting) }} className="flex justify-between">
+                                <h6 class="h6 m-0 w-[130px]"  > Sort by: <span>{selectedOption ? selectedOption : 'All'}</span>
                                 </h6>
+                                <img src={BlackArrow}/></div>
                                 {showSorting && <div class="sort-popup">
                                     <p>Sort by</p>
                                     <ul class="filters-options">

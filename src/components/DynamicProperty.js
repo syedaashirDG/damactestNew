@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'gatsby';
+import Card from "../components/Card"
 import Layout from '../components/Layout'
 import galleryImg1 from '../assets/images/property-details/gallery-img-1.jpg'
 import galleryImg2 from '../assets/images/property-details/gallery-img-2.jpg'
@@ -31,11 +33,15 @@ import MailIcon from '../assets/svg/mail.svg'
 import WhatsAppIcon from '../assets/svg/whatsapp.svg'
 import PayIcon from '../assets/svg/pay.svg'
 import BackArrow from '../assets/svg/back-arrow.svg'
+import RightArrow from '../assets/svg/right-arrow.svg'
 import Fancybox from './FancyBox'
+import Data from '../sample_data/sample_data.json'
 
 const DynamicProperty = ({ pageContext }) => {
     console.log(pageContext.propertyData, "propertyData")
+
     const propertyData = pageContext.propertyData;
+    const relatedProperty = Data.properties
 
 
     return (
@@ -360,6 +366,27 @@ const DynamicProperty = ({ pageContext }) => {
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </section>
+
+
+                <section class="section property related--property">
+                    <div class="container">
+                        <h3 className='related-property-title'>SIMILAR PROPERTIES YOU MIGHT LIKE</h3>
+                        <div class="property-card-list">
+                            {relatedProperty.map((property, index) => (
+                                <Link key={index} to={`/detail/${property.property_alot_number}`}>
+                                    <Card data={property} />
+                                </Link>
+                            ))}
+                        </div>
+                        <hr className="hr" />
+                        <div className='viewAll_properties'>
+                            <a href='/'>
+                                <h3>View All</h3>
+                                <RightArrow />
+                            </a>
                         </div>
                     </div>
                 </section>

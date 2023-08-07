@@ -11,31 +11,31 @@ export default function Home({ data }) {
     const properties = data.allDummyDataJson.nodes.map((property) => property);
     const [showSorting, setshowSorting] = useState(false)
     const [checkedValues, setCheckedValues] = useState([]);
-    const[sort,setSort] = useState(['All','Studio','1BR'])
+    const [sort, setSort] = useState(['All', 'Studio', '1BR'])
     const [selectedOption, setSelectedOption] = useState('All');
 
-  const handleCheckboxChange = (event, option) => {
-    const { checked } = event.target;
-    setSelectedOption(checked ? option : '');
-    // console.log('from home======',selectedOption);
-  };
+    const handleCheckboxChange = (event, option) => {
+        const { checked } = event.target;
+        setSelectedOption(checked ? option : '');
+        // console.log('from home======',selectedOption);
+    };
 
     const handleChildStateChange = (newState) => {
         setCheckedValues(newState);
-      };
+    };
 
-      
+
     const filteredProperties = properties.filter((property) => {
         if (checkedValues.length === 0 || checkedValues.includes("All")) {
-          // If no filters selected or "All" selected, return all properties
-          return true;
+            // If no filters selected or "All" selected, return all properties
+            return true;
         } else {
-          // Filter properties based on no_of_bedroom field matching any checkedValues option
-          return checkedValues.includes(property.no_of_bedroom);
+            // Filter properties based on no_of_bedroom field matching any checkedValues option
+            return checkedValues.includes(property.no_of_bedroom);
         }
-      });
+    });
 
-      const sortProperties = (properties, option) => {
+    const sortProperties = (properties, option) => {
         switch (option) {
             case 'All':
                 return properties; // No sorting needed
@@ -60,25 +60,25 @@ export default function Home({ data }) {
                     <div class="container">
                         <div class="sort-wrapper">
                             <div class="selection-input ">
-                                <h6 class="h6 m-0 w-[130px]"  onClick={() => { setshowSorting(!showSorting) }} > Sort by: <span>{selectedOption ? selectedOption :'All'}</span>
+                                <h6 class="h6 m-0 w-[130px]" onClick={() => { setshowSorting(!showSorting) }} > Sort by: <span>{selectedOption ? selectedOption : 'All'}</span>
                                 </h6>
                                 {showSorting && <div class="sort-popup">
                                     <p>Sort by</p>
                                     <ul class="filters-options">
-                                        {sort && sort.map((item,index)=>{
-                                            return(
+                                        {sort && sort.map((item, index) => {
+                                            return (
                                                 <li key={index}>
-                                            <label class="input-group">{item} <input value={item}
-                      checked={selectedOption === item}
-                      onChange={(e) => handleCheckboxChange(e, item)} type="checkbox" />
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </li>
+                                                    <label class="input-group">{item} <input value={item}
+                                                        checked={selectedOption === item}
+                                                        onChange={(e) => handleCheckboxChange(e, item)} type="checkbox" />
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </li>
 
                                             )
                                         })}
-                                        
-                                        
+
+
                                     </ul>
                                 </div>}
                             </div>

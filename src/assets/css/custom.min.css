@@ -2097,6 +2097,43 @@ p.s-font {
     padding: 1.875em 0 2.25em
 }
 
+.related--property {
+    padding: 5em 0;
+}
+
+.related--property .related-property-title {
+    font-size: 2em;
+    text-transform: uppercase;
+    font-family: 'Spectral';
+    font-weight: 700;
+}
+
+.related--property .viewAll_properties a {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.related--property .viewAll_properties h3 {
+    margin: 0;
+    font-family: 'Spectral';
+    text-transform: uppercase;
+    color: #C3AD75;
+}
+
+@media screen and (max-width: 576px) {
+
+    .related--property .related-property-title,
+    .related--property .viewAll_properties h3 {
+        font-size: 1.25em;
+    }
+
+    .related--property .viewAll_properties svg {
+        width: 1.25em;
+        height: 1.25em;
+    }
+}
+
 .property-card-list {
     display: grid;
     grid-gap: 1.25em;

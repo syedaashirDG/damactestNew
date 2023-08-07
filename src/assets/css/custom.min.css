@@ -1681,7 +1681,7 @@ p.s-font {
     right: 0;
     width: 1em;
     height: 1em;
-    background: url(../svg/side-triangle.svg) no-repeat;
+    background: url(../images/side-triangle.png) no-repeat;
     z-index: 5
 }
 
@@ -2156,7 +2156,7 @@ p.s-font {
 }
 
 .sort-wrapper .selection-input::after {
-    background: url(../svg/black-arrow.svg);
+    background: url(../images/black-arrow.png);
     height: 16px
 }
 
